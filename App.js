@@ -5,12 +5,51 @@ import {
   ActivityIndicator,
   Image,
   ImageBackground,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
+
+const RowView = ({ label, value }) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <View>
+        <Text
+          style={{
+            fontFamily: "Inter-Regular",
+            color: "#303030",
+            fontSize: 10,
+            letterSpacing: 2,
+            textTransform: "uppercase",
+          }}
+        >
+          {label}
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={{
+            fontFamily: "Inter-Bold",
+            fontSize: 20,
+            color: "#303030",
+          }}
+        >
+          {value}
+        </Text>
+      </View>
+    </View>
+  );
+};
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -130,7 +169,57 @@ export default function App() {
         </View>
       </View>
 
+      {/* BUTTON */}
+      <TouchableOpacity
+        onPress={() => {
+          // setShowMore(!showMore);
+        }}
+        style={{
+          flexDirection: "row",
+          height: 40,
+          width: 115,
+          backgroundColor: "#fff",
+          borderRadius: 30,
+          marginTop: 50,
+          justifyContent: "space-between",
+          paddingLeft: 16,
+          paddingRight: 4,
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            fontFamily: "Inter-Bold",
+            fontSize: 12,
+            color: "#000",
+            letterSpacing: 3,
+          }}
+        >
+          {/* {showMore ? "LESS" : "MORE"} */}
+        </Text>
+        {/* <Image
+          source={
+            showMore
+              ? require("./assets/arrow-up.png")
+              : require("./assets/arrow-down.png")
+          }
+        /> */}
+      </TouchableOpacity>
       <StatusBar style="auto"></StatusBar>
+
+      <View
+        style={{
+          backgroundColor: "white",
+          opacity: 0.8,
+          paddingVertical: 48,
+          paddingHorizontal: 26,
+        }}
+      >
+        <RowView label={"Current Timezone"} value="Europe/London" />
+        <RowView label={"Day of the year"} value="295" />
+        <RowView label={"Day of the week"} value="5" />
+        <RowView label={"Week number"} value="42" />
+      </View>
     </ImageBackground>
   );
 }
