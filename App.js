@@ -1,18 +1,17 @@
-import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
-import { useFonts } from "expo-font";
-import { StatusBar } from "expo-status-bar";
 import {
   ActivityIndicator,
-  Image,
   ImageBackground,
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  Image,
+  TouchableOpacity,
 } from "react-native";
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
+import { useState } from "react";
 
 const RowView = ({ label, value }) => {
   return (
@@ -21,6 +20,7 @@ const RowView = ({ label, value }) => {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        marginBottom: 8,
       }}
     >
       <View>
@@ -36,6 +36,7 @@ const RowView = ({ label, value }) => {
           {label}
         </Text>
       </View>
+
       <View>
         <Text
           style={{
@@ -56,6 +57,7 @@ export default function App() {
     "Inter-Regular": Inter_400Regular,
     "Inter-Bold": Inter_700Bold,
   });
+  const [showMore, setShowMore] = useState(false);
 
   if (!fontsLoaded) {
     return <ActivityIndicator />;
@@ -66,6 +68,7 @@ export default function App() {
       source={require("./assets/light-bg.png")}
       style={{ flex: 1 }}
     >
+      {/* PARENT VIEW */}
       <View
         style={{
           flex: 1,
@@ -74,39 +77,39 @@ export default function App() {
           paddingHorizontal: 26,
         }}
       >
-        {/* Upper portion of the screen */}
-        <View
-          style={{
-            flexDirection: "row",
-          }}
-        >
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                fontFamily: "Inter-Regular",
-                fontSize: 12,
-                color: "white",
-              }}
-            >
-              “The science of operations, as derived from mathematics more
-              especially, is a science of itself, and has its own abstract truth
-              and value.”
-            </Text>
-            <Text
-              style={{
-                fontFamily: "Inter-Bold",
-                color: "#fff",
-                fontSize: 12,
-                marginTop: 8,
-              }}
-            >
-              - Ada Lovelace
-            </Text>
+        {/* UPPER PORTION OF THE SCREEN */}
+        {!showMore && (
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  fontFamily: "Inter-Regular",
+                  fontSize: 12,
+                  color: "#fff",
+                }}
+              >
+                “The science of operations, as derived from mathematics more
+                especially, is a science of itself, and has its own abstract
+                truth and value.”
+              </Text>
+              <Text
+                style={{
+                  fontFamily: "Inter-Bold",
+                  color: "#fff",
+                  fontSize: 12,
+                  marginTop: 8,
+                }}
+              >
+                - Ada Lovelace
+              </Text>
+            </View>
+            <Image source={require("./assets/refresh.png")} />
           </View>
-          {/* <Image source={require("./assets/refresh.png")} /> */}
-        </View>
-        {/* Bottom Portion of the screen */}
+        )}
+
+        {/* BOTTOM PORTION */}
         <View style={{ marginBottom: 36 }}>
+          {/* GREETING Text */}
           <View
             style={{
               flexDirection: "row",
@@ -123,15 +126,12 @@ export default function App() {
                 letterSpacing: 3,
               }}
             >
-              Good Morning
+              GOOD MORNING
             </Text>
           </View>
 
-          <View
-            style={{
-              marginTop: 8,
-            }}
-          >
+          {/* TIME */}
+          <View style={{ marginTop: 8 }}>
             <Text>
               <Text
                 style={{
@@ -140,86 +140,89 @@ export default function App() {
                   color: "white",
                 }}
               >
-                11:38
+                11:30
               </Text>
               <Text
                 style={{
-                  color: "white",
                   fontFamily: "Inter-Regular",
                   fontSize: 15,
+                  color: "white",
                 }}
               >
                 BST
               </Text>
             </Text>
-            {/* LOCATION */}
-            <View style={{ marginTop: 16 }}>
-              <Text
-                style={{
-                  fontFamily: "Inter-Bold",
-                  fontSize: 15,
-                  color: "white",
-                  letterSpacing: 3,
-                }}
-              >
-                IN LONDON, UK
-              </Text>
-            </View>
           </View>
+
+          {/* LOCATION */}
+          <View style={{ marginTop: 16 }}>
+            <Text
+              style={{
+                fontFamily: "Inter-Bold",
+                fontSize: 15,
+                color: "white",
+                letterSpacing: 3,
+              }}
+            >
+              IN LONDON, UK
+            </Text>
+          </View>
+
+          {/* BUTTON */}
+          <TouchableOpacity
+            onPress={() => {
+              setShowMore(!showMore);
+            }}
+            style={{
+              flexDirection: "row",
+              height: 40,
+              width: 115,
+              backgroundColor: "#fff",
+              borderRadius: 30,
+              marginTop: 50,
+              justifyContent: "space-between",
+              paddingLeft: 16,
+              paddingRight: 4,
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Inter-Bold",
+                fontSize: 12,
+                color: "#000",
+                letterSpacing: 3,
+              }}
+            >
+              {showMore ? "LESS" : "MORE"}
+            </Text>
+            <Image
+              source={
+                showMore
+                  ? require("./assets/arrow-up.png")
+                  : require("./assets/arrow-down.png")
+              }
+            />
+          </TouchableOpacity>
         </View>
       </View>
 
-      {/* BUTTON */}
-      <TouchableOpacity
-        onPress={() => {
-          // setShowMore(!showMore);
-        }}
-        style={{
-          flexDirection: "row",
-          height: 40,
-          width: 115,
-          backgroundColor: "#fff",
-          borderRadius: 30,
-          marginTop: 50,
-          justifyContent: "space-between",
-          paddingLeft: 16,
-          paddingRight: 4,
-          alignItems: "center",
-        }}
-      >
-        <Text
+      {/* EXPANDED VIEW */}
+      {showMore && (
+        <View
           style={{
-            fontFamily: "Inter-Bold",
-            fontSize: 12,
-            color: "#000",
-            letterSpacing: 3,
+            backgroundColor: "#fff",
+            opacity: 0.8,
+            paddingVertical: 48,
+            paddingHorizontal: 26,
           }}
         >
-          {/* {showMore ? "LESS" : "MORE"} */}
-        </Text>
-        {/* <Image
-          source={
-            showMore
-              ? require("./assets/arrow-up.png")
-              : require("./assets/arrow-down.png")
-          }
-        /> */}
-      </TouchableOpacity>
-      <StatusBar style="auto"></StatusBar>
-
-      <View
-        style={{
-          backgroundColor: "white",
-          opacity: 0.8,
-          paddingVertical: 48,
-          paddingHorizontal: 26,
-        }}
-      >
-        <RowView label={"Current Timezone"} value="Europe/London" />
-        <RowView label={"Day of the year"} value="295" />
-        <RowView label={"Day of the week"} value="5" />
-        <RowView label={"Week number"} value="42" />
-      </View>
+          <RowView label={"Current Timezone"} value="Europe/London" />
+          <RowView label={"Day of the year"} value="295" />
+          <RowView label={"Day of the week"} value="5" />
+          <RowView label={"Week number"} value="42" />
+        </View>
+      )}
     </ImageBackground>
   );
 }
