@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import {
   ActivityIndicator,
+  Image,
   ImageBackground,
   SafeAreaView,
   ScrollView,
@@ -64,6 +65,68 @@ export default function App() {
             </Text>
           </View>
           {/* <Image source={require("./assets/refresh.png")} /> */}
+        </View>
+        {/* Bottom Portion of the screen */}
+        <View style={{ marginBottom: 36 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Image source={require("./assets/sun.png")} />
+            <Text
+              style={{
+                fontFamily: "Inter-Regular",
+                fontSize: 15,
+                color: "white",
+                marginLeft: 8,
+                letterSpacing: 3,
+              }}
+            >
+              Good Morning
+            </Text>
+          </View>
+
+          <View
+            style={{
+              marginTop: 8,
+            }}
+          >
+            <Text>
+              <Text
+                style={{
+                  fontFamily: "Inter-Bold",
+                  fontSize: 100,
+                  color: "white",
+                }}
+              >
+                11:38
+              </Text>
+              <Text
+                style={{
+                  color: "white",
+                  fontFamily: "Inter-Regular",
+                  fontSize: 15,
+                }}
+              >
+                BST
+              </Text>
+            </Text>
+            {/* LOCATION */}
+            <View style={{ marginTop: 16 }}>
+              <Text
+                style={{
+                  fontFamily: "Inter-Bold",
+                  fontSize: 15,
+                  color: "white",
+                  letterSpacing: 3,
+                }}
+              >
+                IN LONDON, UK
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
 
