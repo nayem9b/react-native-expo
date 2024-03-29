@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import {
   ActivityIndicator,
+  ImageBackground,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -21,45 +22,52 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={{ fontFamily: "Inter-Regular", fontSize: 28 }}>
-        Hi,Hope you are doing great
-      </Text>
-      <Text style={{ fontFamily: "Inter-Bold", fontSize: 28 }}>
-        I am testing Inter Bold font
-      </Text>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <ImageBackground
+      source={require("./assets/light-bg.png")}
+      style={{ flex: 1 }}
+    >
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "space-between",
+          marginTop: 32,
+          paddingHorizontal: 26,
+        }}
+      >
+        {/* Upper portion of the screen */}
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                fontFamily: "Inter-Regular",
+                fontSize: 12,
+                color: "white",
+              }}
+            >
+              “The science of operations, as derived from mathematics more
+              especially, is a science of itself, and has its own abstract truth
+              and value.”
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Inter-Bold",
+                color: "#fff",
+                fontSize: 12,
+                marginTop: 8,
+              }}
+            >
+              - Ada Lovelace
+            </Text>
+          </View>
+          {/* <Image source={require("./assets/refresh.png")} /> */}
+        </View>
+      </View>
+
+      <StatusBar style="auto"></StatusBar>
+    </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 20,
-    backgroundColor: "#fff",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  box: {
-    height: 150,
-    width: 150,
-    marginTop: 100,
-    backgroundColor: "yellow",
-  },
-  box1: {
-    backgroundColor: "yellow",
-    flex: 1,
-  },
-  box2: {
-    flex: 2,
-    backgroundColor: "green",
-    alignSelf: "flex-end",
-  },
-  box3: {
-    flex: 0.5,
-    backgroundColor: "purple",
-    alignSelf: "center",
-  },
-});
