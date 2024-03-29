@@ -1,13 +1,33 @@
+import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
+import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    "Inter-Regular": Inter_400Regular,
+    "Inter-Bold": Inter_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-
-      <View style={[styles.box, styles.box1]} />
-      <View style={[styles.box, styles.box2]} />
-      <View style={[styles.box, styles.box3]} />
+      <Text style={{ fontFamily: "Inter-Regular", fontSize: 28 }}>
+        Hi,Hope you are doing great
+      </Text>
+      <Text style={{ fontFamily: "Inter-Bold", fontSize: 28 }}>
+        I am testing Inter Bold font
+      </Text>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -16,16 +36,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding :20,
+    alignItems: "center",
+    padding: 20,
     backgroundColor: "#fff",
     flexDirection: "column",
-    justifyContent: "space-around",
-    // flexWrap: "wrap"
+    justifyContent: "center",
   },
   box: {
     height: 150,
     width: 150,
-    marginTop:100,
+    marginTop: 100,
     backgroundColor: "yellow",
   },
   box1: {
@@ -35,11 +55,11 @@ const styles = StyleSheet.create({
   box2: {
     flex: 2,
     backgroundColor: "green",
-    alignSelf : "flex-end"
+    alignSelf: "flex-end",
   },
   box3: {
     flex: 0.5,
     backgroundColor: "purple",
-    alignSelf: "center"
+    alignSelf: "center",
   },
 });
